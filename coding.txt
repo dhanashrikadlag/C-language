@@ -1,0 +1,49 @@
+
+
+
+
+
+
+
+ Write a program to find the equilibrium element from an integer array. An equilibrium element is defined as the number for which the sum of left side elements is equal to sum of right side elements. 
+Note: If no possible combination exists return 0.
+Examples:
+1. Input: [1,7, 5, 2, 6]
+Output: 5 (since 1 + 7 = 8 and 2 + 6 = 8)
+
+
+2. Input: [10, 1, 1, 9] 
+Output: 1 (since 1 + 9 = 10 and first element is 10)
+
+public class EquilibriumElement {
+    public static void main(String[] args) {
+        int[] arr1 = {1, 7, 5, 2, 6};
+        int[] arr2 = {10, 1, 1, 9};
+
+        System.out.println(findEquilibrium(arr1)); // Output: 5
+        System.out.println(findEquilibrium(arr2)); // Output: 1
+    }
+
+    public static int findEquilibrium(int[] arr) {
+        int totalSum = 0;
+        int leftSum = 0;
+
+        // Calculate total sum of the array
+        for (int num : arr) {
+            totalSum += num;
+        }
+
+        // Traverse the array to find the equilibrium element
+        for (int i = 0; i < arr.length; i++) {
+            totalSum -= arr[i]; // Exclude the current element from total sum
+
+            if (leftSum == totalSum) {
+                return arr[i];
+            }
+
+            leftSum += arr[i]; // Update the left sum for the next iteration
+        }
+
+        return 0; // No equilibrium element found
+    }
+}
